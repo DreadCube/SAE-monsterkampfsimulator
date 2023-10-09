@@ -336,3 +336,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# Mac specific
+.DS_Store
