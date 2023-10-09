@@ -1,7 +1,7 @@
 ﻿namespace Monsterkampfsimulator
 {
-	public static class Output
-	{
+    public static class Output
+    {
         public static void WriteLineAtPosition(string text, int? x = null, int? y = null, int minWidth = 26)
         {
             Console.SetCursorPosition(x ?? Console.CursorLeft, y ?? Console.CursorTop);

@@ -1,8 +1,8 @@
 ﻿namespace Monsterkampfsimulator
 {
-	public class Goblin : Monster
-	{
-		protected override Race race
+    public class Goblin : Monster
+    {
+        protected override Race race
         {
             get
             {
@@ -52,4 +52,3 @@
 
 
 
-  

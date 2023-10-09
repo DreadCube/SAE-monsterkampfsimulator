@@ -8,7 +8,7 @@
      * https://en.wikipedia.org/wiki/Linear_interpolation
      */
     public static class Interpolation
-	{
+    {
         /**
          * Calculates absolute position based on
          * percentage between from and to points.
@@ -35,7 +35,7 @@
         {
             float value = Linear(from + 0f, to + 0f, by);
 
-            return (int) Math.Round(value);
+            return (int)Math.Round(value);
         }
 
         /**

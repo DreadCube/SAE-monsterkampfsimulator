@@ -1,13 +1,13 @@
 ﻿namespace Monsterkampfsimulator
 {
-	public static class InputHelper
-	{
+    public static class InputHelper
+    {
         // TODO: Potentielles feature. Input values würfeln?
         public static float GetFloatInput(string message, float minValue = 0f, float maxValue = 100f)
         {
             string errorMessage = "";
 
-            while(true)
+            while (true)
             {
                 Output.Write($"{message} ", ConsoleColor.Cyan);
 
@@ -52,7 +52,7 @@
         {
             string errorMessage = "";
 
-            while(true)
+            while (true)
             {
                 Console.Write("Enter Race (");
                 foreach (int i in Enum.GetValues(typeof(Monster.Race)))
@@ -90,7 +90,7 @@
                     continue;
                 }
 
-                return (Monster.Race) number;
+                return (Monster.Race)number;
             }
         }
     }

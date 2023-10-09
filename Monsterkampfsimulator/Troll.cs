@@ -1,7 +1,7 @@
 ﻿namespace Monsterkampfsimulator
 {
-	public class Troll: Monster
-	{
+    public class Troll : Monster
+    {
         protected override Race race
         {
             get
@@ -13,7 +13,7 @@
         public Troll(float health, float attack, float defense, float speed, Vector2 position)
             : base(health, attack, defense, speed, position)
         {
-		}
+        }
 
         // TODO: Would be cool if we can have a actual width for the Monster
         // Than just have to define everywhere 26.

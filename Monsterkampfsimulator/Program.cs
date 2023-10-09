@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             // TODO: Yeah. If time left.
-         
+
             //Console.ReadKey();
 
             List<Monster> monsters = new List<Monster>(2);
@@ -41,7 +41,7 @@
             float initialHealthMonsterB = monsters[1].GetHealth();
 
 
-            while(!monsters.Exists(monster => monster.GetHealth() <= 0f))
+            while (!monsters.Exists(monster => monster.GetHealth() <= 0f))
             {
                 roundCount++;
 
