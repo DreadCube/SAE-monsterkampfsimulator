@@ -14,10 +14,10 @@
         // S
         private float speed;
 
-
+        // position of the monster
         private Vector2 position;
 
-
+        // the healthbar instance of the monster
         private HealthBar healthBar;
 
 
@@ -53,12 +53,24 @@
 		 */
         protected virtual void RenderImage(Vector2 position) { }
 
-        public float GetSpeed() => speed;
-
-        public Race GetRace() => race;
-
+        /**
+         * Getter for the health
+         */
         public float GetHealth() => health;
 
+        /**
+         * Getter for the speed
+         */
+        public float GetSpeed() => speed;
+
+        /**
+         * Getter for the race of the monster
+         */
+        public Race GetRace() => race;
+
+        /**
+         * Getter for the current position of the monster 
+         */
         public Vector2 GetPosition() => position;
 
         public void Attack(Monster targetMonster)
@@ -116,6 +128,13 @@
             );
         }
 
+        /**
+         * Renders the visual representation of the monster at the specified
+         * render position. This includes:
+         * - The monster image
+         * - The monster healthbar
+         * - The monster Stats
+         */
         public void Render(Vector2 renderPosition, ConsoleColor imageForegroundColor = ConsoleColor.White)
         {
             // TODO: If no need for optional renderPosition, use renderPosition directly
