@@ -17,7 +17,6 @@
         // position of the monster
         private Vector2 position;
 
-
         // the healthbar instance of the monster
         private HealthBar healthBar;
 
@@ -155,28 +154,25 @@
          */
         public void Render(Vector2 renderPosition, ConsoleColor imageForegroundColor = ConsoleColor.White)
         {
-            // TODO: If no need for optional renderPosition, use renderPosition directly
-            Vector2 pos = renderPosition;
-
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = imageForegroundColor;
 
-            RenderImage(pos);
+            RenderImage(renderPosition);
 
-            healthBar.Render(new Vector2(pos.X, Console.CursorTop));
+            healthBar.Render(new Vector2(renderPosition.X, Console.CursorTop));
 
             Console.BackgroundColor = ConsoleColor.DarkMagenta;
             Console.ForegroundColor = ConsoleColor.White;
 
-            Output.WriteLineAtPosition($"{race}", pos.X, Console.CursorTop + 1);
+            Output.WriteLineAtPosition($"{race}", renderPosition.X, Console.CursorTop + 1);
 
 
             Console.BackgroundColor = ConsoleColor.Black;
 
-            Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", pos.X);
-            Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", pos.X);
-            Output.WriteLineAtPosition($"DEFENSE: {Math.Round(defense, 2)}", pos.X);
-            Output.WriteLineAtPosition($"SPEED: {Math.Round(speed, 2)}", pos.X);
+            Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", renderPosition.X);
+            Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", renderPosition.X);
+            Output.WriteLineAtPosition($"DEFENSE: {Math.Round(defense, 2)}", renderPosition.X);
+            Output.WriteLineAtPosition($"SPEED: {Math.Round(speed, 2)}", renderPosition.X);
 
             Console.ResetColor();
         }
