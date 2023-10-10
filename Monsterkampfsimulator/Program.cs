@@ -65,12 +65,27 @@
 
             }
 
-            // TODO: Add ESC for quit, R for restart
-            Console.ReadKey();
+            Output.WriteLineAtPosition("Press Esc to quit, R to restart", Console.WindowWidth / 2);
 
-            Console.Clear();
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKey key = Console.ReadKey(true).Key;
 
-            Main(args);
+                    if (key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+
+                    if (key == ConsoleKey.R)
+                    {
+                        Console.Clear();
+                        Console.SetCursorPosition(0, 0);
+                        Main(args);
+                    }
+                }
+            }
         }
     }
 }
