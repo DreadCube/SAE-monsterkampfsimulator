@@ -14,6 +14,9 @@
         public void SetHealth(float health) => currentHealth = health;
 
 
+        /**
+         * Rendering (visual representation) the healthbar
+         */
         public void Render(Vector2 position)
         {
             Console.SetCursorPosition(position.X, position.Y);
