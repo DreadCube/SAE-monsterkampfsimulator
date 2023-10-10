@@ -8,28 +8,9 @@
 
             //Console.ReadKey();
 
-            List<Monster> monsters = new List<Monster>(2);
 
-            Output.Write("Enter Attributes for the ");
-            Output.Write("first ", ConsoleColor.Cyan);
-            Output.Write("monster:");
-            Console.WriteLine();
-
-            monsters.Add(CreateMonster(new Vector2(0, 5)));
-
-            Console.CursorTop = 0;
-            Output.ClearCurrentLine();
-
-            Output.Write("Enter Attributes for the ");
-            Output.Write("second ", ConsoleColor.Cyan);
-            Output.Write("monster:");
-            Console.WriteLine();
-
-            monsters.Add(CreateMonster(new Vector2(Console.WindowWidth - 30, 5), monsters[0].GetRace()));
-
-            Console.CursorTop = 0;
-            Output.ClearCurrentLine();
-
+            SpawnManager spawnManager = new SpawnManager();
+            List <Monster> monsters = spawnManager.Initialize();
 
             // sorts the monsters by speed. monsters[0] will always be the first attacking monster
             monsters.Sort((monsterA, monsterB) => monsterA.GetSpeed() > monsterB.GetSpeed() ? -1 : 1);
@@ -99,28 +80,6 @@
             Console.Clear();
 
             Main(args);
-        }
-
-
-        // TODO: Maybe create a SpawnManager Singleton class for this
-        private static Monster CreateMonster(Vector2 position, Monster.Race? notAllowedRace = null)
-        {
-            Monster.Race race = InputHelper.GetRaceInput(notAllowedRace);
-
-            float health = InputHelper.GetFloatInput("Enter Health", 1);
-            float attack = InputHelper.GetFloatInput("Enter Attack");
-            float defense = InputHelper.GetFloatInput("Enter Defense");
-            float speed = InputHelper.GetFloatInput("Enter Speed", 1);
-
-            switch (race)
-            {
-                case Monster.Race.Goblin:
-                    return new Goblin(health, attack, defense, speed, position);
-                case Monster.Race.Ork:
-                    return new Ork(health, attack, defense, speed, position);
-                default:
-                    return new Troll(health, attack, defense, speed, position);
-            }
         }
     }
 }
