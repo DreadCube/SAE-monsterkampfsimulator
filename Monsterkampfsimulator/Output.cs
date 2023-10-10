@@ -50,7 +50,7 @@
         {
             // Blue Sky
             Console.BackgroundColor = ConsoleColor.DarkBlue;
-            for (int i = 0; i < Console.WindowHeight; i++)
+            for (int i = 0; i < Console.WindowHeight / 2; i++)
             {
 
                 Console.CursorTop = i;

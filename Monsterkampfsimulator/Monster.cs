@@ -36,6 +36,7 @@
             Goblin = 3
         }
 
+
         protected Monster(float health, float attack, float defense, float speed, Vector2 position)
         {
             this.health = health;
@@ -46,18 +47,19 @@
             healthBar = new HealthBar(health);
         }
 
-        /**
-         * Applies damage to the monster (if damage is there)
-         */
+        /// <summary>
+        /// Applies damage to the monster (if damage is there).
+        /// health of the monster will not go under 0.
+        ///
+        /// If theres damage to the target monster we render the target monster red
+        /// for a split of a time
+        /// </summary>
+        /// <param name="damage">the damage to take</param>
         private void TakeDamage(float damage)
         {
             health = Math.Max(0, health - damage);
             healthBar.SetHealth(health);
 
-            /**
-             * If theres damage to the target monster we render the target monster
-             * red for a split of a time
-             */
             if (damage > 0f)
             {
                 Thread.Sleep(100);
@@ -66,44 +68,35 @@
             }
         }
 
-        /**
-         * Getter for the defense
-         */ 
         private float GetDefense() => defense;
 
-        /**
-		 * Every child clas of Monster (Ork, Troll, Goblin) has to define a image
-		 * that will be rendered
-		 */
+        /// <summary>
+        /// We wanna enforce that every child class of monster has a RenderImage
+        /// method. To define a RenderImage implementation in the Monster class
+        /// itself doesn't make sense, because we just have instances of the child classes.
+        /// So defining the method here as virtual, so every child class can override.
+        /// </summary>
+        /// <param name="position"></param>
         protected virtual void RenderImage(Vector2 position) { }
 
-        /**
-         * Getter for the health
-         */
+
         public float GetHealth() => health;
 
-        /**
-         * Getter for the speed
-         */
         public float GetSpeed() => speed;
 
-        /**
-         * Getter for the race of the monster
-         */
         public Race GetRace() => race;
 
-        /**
-         * Getter for the current position of the monster 
-         */
         public Vector2 GetPosition() => position;
 
-
-        /**
-         * Handles the attack logic.
-         * 1. Attacking Monster wll be forward animated to the target
-         * 2. The actual damage will be calculated and applied
-         * 3. The Attacking monster will be moved backwards
-         */
+        /// <summary>
+        /// Handles the attack logic.
+        /// <list type="number">
+        /// <item>Attacking monster will be forward animated to the target</item>
+        /// <item>The actual damage will be calculated and applied</item>
+        /// <item>The attacking monster will be animated backwards</item>
+        /// </list>
+        /// </summary>
+        /// <param name="targetMonster">The target monster to attack</param>
         public void Attack(Monster targetMonster)
         {
             int movingDirectionX = position.X - targetMonster.position.X < 0 ? 1 : -1;
@@ -145,13 +138,17 @@
             );
         }
 
-        /**
-         * Renders the visual representation of the monster at the specified
-         * render position. This includes:
-         * - The monster image
-         * - The monster healthbar
-         * - The monster Stats
-         */
+        /// <summary>
+        /// Renders the visual representation of the monster at the specified
+        /// render position. This includes:
+        /// <list type="bullet">
+        /// <item>The monster image</item>
+        /// <item>The monster healthbar</item>
+        /// <item>The monster stats</item>
+        /// </list>
+        /// </summary>
+        /// <param name="renderPosition">Vector2 position</param>
+        /// <param name="imageForegroundColor">rendered foreground color for the image</param>
         public void Render(Vector2 renderPosition, ConsoleColor imageForegroundColor = ConsoleColor.White)
         {
             Console.BackgroundColor = ConsoleColor.Black;
@@ -176,6 +173,5 @@
 
             Console.ResetColor();
         }
-
     }
 }

@@ -13,10 +13,10 @@
 
         public void SetHealth(float health) => currentHealth = health;
 
-
-        /**
-         * Rendering (visual representation) the healthbar
-         */
+        /// <summary>
+        /// Renders the visual representation of the healthbar
+        /// </summary>
+        /// <param name="position">render position</param>
         public void Render(Vector2 position)
         {
             Console.SetCursorPosition(position.X, position.Y);

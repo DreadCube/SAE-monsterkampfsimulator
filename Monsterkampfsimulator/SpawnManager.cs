@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Monsterkampfsimulator
 {
@@ -14,7 +15,6 @@ namespace Monsterkampfsimulator
 			}
 		}
 
-        // TODO: Maybe create a SpawnManager Singleton class for this
         private Monster CreateMonster(Vector2 position, Monster.Race? notAllowedRace = null)
         {
             Monster.Race race = GetRaceInput(notAllowedRace);
@@ -35,6 +35,15 @@ namespace Monsterkampfsimulator
             }
         }
 
+        /// <summary>
+        /// A helper function that asks the user for input. In this case a float.
+        /// If the user entered an invalid float input we provide a proper error message
+        /// and the user has to try entering again.
+        /// </summary>
+        /// <param name="message">output message</param>
+        /// <param name="minValue">minimal float value</param>
+        /// <param name="maxValue">maximal float value</param>
+        /// <returns></returns>
         private float GetFloatInput(string message, float minValue = 0f, float maxValue = 100f)
         {
             string errorMessage = "";
@@ -79,7 +88,18 @@ namespace Monsterkampfsimulator
                 return number;
             }
         }
-
+        /// <summary>
+        /// A helper function to read out the monster race from a user input.
+        /// Basically every Monster Race is a option for the user.
+        /// Optional this func can receive a race that will be excluded from the
+        /// available race options.
+        /// Not valid input will be catched.
+        /// The user has to try again if he entered wrong input.
+        /// </summary>
+        /// <param name="notAllowedRace">
+        /// Optional: A race that is not allowed as input
+        /// </param>
+        /// <returns></returns>
         private Monster.Race GetRaceInput(Monster.Race? notAllowedRace = null)
         {
             string errorMessage = "";
@@ -126,7 +146,14 @@ namespace Monsterkampfsimulator
             }
         }
 
-        // TODO: I think array with 2 entries makes more sense if the size is fixed
+        /// <summary>
+        /// Initialized a List with monsters. The size is fixed to two.
+        /// We compare both monsters entered speed attributes and sort the list
+        /// accordingly.
+        /// monsters[0] = the monster with more speed.
+        /// monsters[1] = the monster with less speed.
+        /// </summary>
+        /// <returns>A list with two monsters</returns>
         public List<Monster> Initialize()
         {
             List<Monster> monsters = new List<Monster>(2);
