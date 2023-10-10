@@ -151,6 +151,10 @@ namespace Monsterkampfsimulator
             Console.CursorTop = 0;
             Output.ClearCurrentLine();
 
+
+            // sorts the monsters by speed. monsters[0] will always be the first attacking monster
+            monsters.Sort((monsterA, monsterB) => monsterA.GetSpeed() > monsterB.GetSpeed() ? -1 : 1);
+
             return monsters;
         }
     }

@@ -4,19 +4,10 @@
     {
         static void Main(string[] args)
         {
-            // TODO: Yeah. If time left.
-
-            //Console.ReadKey();
-
-
             SpawnManager spawnManager = new SpawnManager();
             List <Monster> monsters = spawnManager.Initialize();
 
-            // sorts the monsters by speed. monsters[0] will always be the first attacking monster
-            monsters.Sort((monsterA, monsterB) => monsterA.GetSpeed() > monsterB.GetSpeed() ? -1 : 1);
-
             int roundCount = 0;
-
 
             float initialHealthMonsterA = monsters[0].GetHealth();
             float initialHealthMonsterB = monsters[1].GetHealth();
