@@ -15,7 +15,7 @@
             this.healthBarWidth = healthBarWidth;
         }
 
-        public void SetHealth(float health) => currentHealth = health;
+        public void SetHealth(float health) => currentHealth = Math.Max(health, 0);
 
         /// <summary>
         /// Renders the visual representation of the healthbar
