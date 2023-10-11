@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            SpawnManager spawnManager = new SpawnManager();
-            List <Monster> monsters = spawnManager.Initialize();
+            List <Monster> monsters = SpawnManager.Instance.Initialize();
 
             int roundCount = 0;
 

@@ -1,11 +1,8 @@
-﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Monsterkampfsimulator
+﻿namespace Monsterkampfsimulator
 {
 	public class SpawnManager
 	{
-		private static SpawnManager? Instance;
+		public static SpawnManager Instance = new SpawnManager();
 
 		public SpawnManager()
 		{
