@@ -9,14 +9,14 @@
 
   <ItemGroup>
     <None Remove="Managers\" />
-    <None Remove="Monsters\" />
     <None Remove="Helpers\" />
     <None Remove="Structs\" />
+    <None Remove="Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Managers\" />
-    <Folder Include="Monsters\" />
     <Folder Include="Helpers\" />
     <Folder Include="Structs\" />
+    <Folder Include="Classes\" />
   </ItemGroup>
 </Project>
