@@ -44,13 +44,15 @@
          * A callback will be executed for every frame.
          * The callback receives the interpolated position at the current frame.
          */
-        public static void AnimateLinear(int from, int to, Action<int> frameCallback, int frames = 20, int frameTime = 50)
+        public static void AnimateLinear(Vector2 from, Vector2 to, Action<Vector2> frameCallback, uint frames = 20, int frameTime = 50)
         {
-            for (int i = 1; i <= frames; i++)
+            for (uint i = 1; i <= frames; i++)
             {
-                int interpolatedPosition = Linear(from, to, (1f / frames) * i);
+                float by = (1f / frames) * i;
+                int interpolatedPositionX = Linear(from.X, to.X, by);
+                int interpolatedPositionY = Linear(from.Y, to.Y, by);
 
-                frameCallback(interpolatedPosition);
+                frameCallback(new Vector2(interpolatedPositionX, interpolatedPositionY));
 
                 Thread.Sleep(frameTime);
             }

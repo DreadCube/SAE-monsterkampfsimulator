@@ -21,7 +21,11 @@
         private HealthBar healthBar;
 
         // Width of the monster
-        private int width = 26;
+        private int width {
+            get {
+                return 26;
+            }
+        }
 
 
         /**
@@ -92,6 +96,7 @@
 
         public Vector2 GetPosition() => position;
 
+
         /// <summary>
         /// Handles the attack logic.
         /// <list type="number">
@@ -103,23 +108,24 @@
         /// <param name="targetMonster">The target monster to attack</param>
         public void Attack(Monster targetMonster)
         {
-            int movingDirectionX = position.X - targetMonster.position.X < 0 ? 1 : -1;
+            int offset = position.X < targetMonster.position.X ? width : -width;
+
+            Vector2 targetPosition = new Vector2(targetMonster.position.X - offset, targetMonster.position.Y);
 
             /**
 			 * Attack animation forward to the target
 			 */
             Interpolation.AnimateLinear
             (
-                position.X,
-                targetMonster.position.X - (width * movingDirectionX),
-                (int currentPositionX) =>
+                position,
+                targetPosition,
+                (Vector2 interpolatedPosition) =>
                 {
                     Console.Clear();
-                    Render(new Vector2(currentPositionX, position.Y));
-                    targetMonster.Render(targetMonster.position);
+                    Render(interpolatedPosition);
+                    targetMonster.Render(targetMonster.GetPosition());
                 }
             );
-
 
 
             float damage = Math.Max(0, attack - targetMonster.GetDefense());
@@ -131,13 +137,13 @@
 			 */
             Interpolation.AnimateLinear
             (
-                targetMonster.position.X - (width * movingDirectionX),
-                position.X,
-                (currentPositionX) =>
+                targetPosition,
+                position,
+                (Vector2 interpolatedPosition) =>
                 {
                     Console.Clear();
-                    Render(new Vector2(currentPositionX, position.Y));
-                    targetMonster.Render(targetMonster.position);
+                    Render(interpolatedPosition);
+                    targetMonster.Render(targetMonster.GetPosition());
                 }
             );
         }

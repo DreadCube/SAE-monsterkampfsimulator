@@ -46,6 +46,7 @@ namespace Monsterkampfsimulator
             }
         }
 
+        // Todo: Set Console Width and height...
 		public void Start()
 		{
             List<Monster> monsters = SpawnManager.Instance.Initialize();
@@ -96,11 +97,14 @@ namespace Monsterkampfsimulator
                 /**
                  * Animate the winning monster to the center of the screen.
                  */
-                Interpolation.AnimateLinear(winningMonster.GetPosition().X, Console.WindowWidth / 2, (int interpolatedX) =>
-                {
-                    Console.Clear();
-                    winningMonster.Render(new Vector2(interpolatedX, winningMonster.GetPosition().Y));
-                });
+                Interpolation.AnimateLinear(
+                    winningMonster.GetPosition(),
+                    new Vector2(Console.WindowWidth / 2, Console.WindowHeight / 2),
+                    (Vector2 interpolatedPositionX) =>
+                    {
+                        Console.Clear();
+                        winningMonster.Render(interpolatedPositionX);
+                    });
 
                 Output.WriteLineAtPosition("The winner is " + winningMonster.GetRace() + "!", Console.WindowWidth / 2);
                 Output.WriteLineAtPosition("This fight took " + roundCount + " rounds!", Console.WindowWidth / 2);
