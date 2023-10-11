@@ -20,12 +20,9 @@
         // the healthbar instance of the monster
         private HealthBar healthBar;
 
-        // Width of the monster
-        private int width {
-            get {
-                return 26;
-            }
-        }
+
+        // The size of the monster
+        private Size size = new Size(26, 19);
 
 
         /**
@@ -52,7 +49,7 @@
             this.defense = defense;
             this.speed = speed;
             this.position = position;
-            healthBar = new HealthBar(health, width);
+            healthBar = new HealthBar(health, size.Width);
         }
 
         /// <summary>
@@ -108,7 +105,7 @@
         /// <param name="targetMonster">The target monster to attack</param>
         public void Attack(Monster targetMonster)
         {
-            int offset = position.X < targetMonster.position.X ? width : -width;
+            int offset = position.X < targetMonster.position.X ? size.Width : -size.Width;
 
             Vector2 targetPosition = new Vector2(targetMonster.position.X - offset, targetMonster.position.Y);
 
@@ -171,15 +168,14 @@
             Console.BackgroundColor = ConsoleColor.DarkMagenta;
             Console.ForegroundColor = ConsoleColor.White;
 
-            Output.WriteLineAtPosition($"{race}", renderPosition.X, Console.CursorTop + 1, minWidth: width);
-
+            Output.WriteLineAtPosition($"{race}", renderPosition.X, Console.CursorTop + 1, minWidth: size.Width);
 
             Console.BackgroundColor = ConsoleColor.Black;
 
-            Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", renderPosition.X, minWidth: width);
-            Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", renderPosition.X, minWidth: width);
-            Output.WriteLineAtPosition($"DEFENSE: {Math.Round(defense, 2)}", renderPosition.X, minWidth: width);
-            Output.WriteLineAtPosition($"SPEED: {Math.Round(speed, 2)}", renderPosition.X, minWidth: width);
+            Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", renderPosition.X, minWidth: size.Width);
+            Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", renderPosition.X, minWidth: size.Width);
+            Output.WriteLineAtPosition($"DEFENSE: {Math.Round(defense, 2)}", renderPosition.X, minWidth: size.Width);
+            Output.WriteLineAtPosition($"SPEED: {Math.Round(speed, 2)}", renderPosition.X, minWidth: size.Width);
 
             Console.ResetColor();
         }
