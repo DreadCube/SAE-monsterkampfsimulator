@@ -15,8 +15,6 @@
         {
         }
 
-        // TODO: Would be cool if we can have a actual width for the Monster
-        // Than just have to define everywhere 26.
         protected override void RenderImage(Vector2 position)
         {
             // Inspired by : https://ascii.co.uk/art/gnome

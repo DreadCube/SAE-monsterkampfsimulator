@@ -2,7 +2,7 @@
 {
     public static class Output
     {
-        public static void WriteLineAtPosition(string text, int? x = null, int? y = null, int minWidth = 26)
+        public static void WriteLineAtPosition(string text, int? x, int? y = null, int minWidth = 0)
         {
             Console.SetCursorPosition(x ?? Console.CursorLeft, y ?? Console.CursorTop);
             Console.WriteLine(text.PadRight(minWidth, ' '));
