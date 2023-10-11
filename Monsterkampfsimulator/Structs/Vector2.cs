@@ -1,14 +1,14 @@
 ﻿namespace Monsterkampfsimulator
 {
-    public struct Size
+    public struct Vector2
     {
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
-        public Size(int width, int height)
+        public Vector2(int x, int y)
         {
-            Width = width;
-            Height = height;
+            X = x;
+            Y = y;
         }
     }
 }
