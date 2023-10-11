@@ -43,8 +43,6 @@
          * 
          * A callback will be executed for every frame.
          * The callback receives the interpolated position at the current frame.
-         * 
-         * TODO: Maybe frameTime can be overrided by the user as setting or something?
          */
         public static void AnimateLinear(int from, int to, Action<int> frameCallback, int frames = 20, int frameTime = 50)
         {
