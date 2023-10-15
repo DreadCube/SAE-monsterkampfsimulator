@@ -27,8 +27,10 @@
         {
             Console.SetCursorPosition(position.X, position.Y);
 
-            // Determines how many green blocks we have to render (basically percentage of health left)
-            // We are rounding up. 0.1 should render 1 green Block Count. Only absolute 0 should be greenBlockCount = 0;
+            /*
+             * Determines how many green blocks we have to render (basically percentage of health left)
+             * We are rounding up. 0.1 should render 1 green Block Count. Only absolute 0 should be greenBlockCount = 0;
+             */
             uint greenBlockCount = (uint)Math.Ceiling((healthBarWidth / initialHealth) * currentHealth);
 
             for (byte i = 1; i <= healthBarWidth; i++)
