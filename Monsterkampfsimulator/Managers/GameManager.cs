@@ -19,7 +19,7 @@
 
         private void WaitForUserInput()
         {
-            Output.WriteLineAtPosition("Press Esc to quit, R to restart", Console.WindowWidth / 2);
+            Output.WriteLineAtPosition("Press Esc to quit, R to restart", Console.WindowWidth / 2 - 15);
 
             while (true)
             {
@@ -65,7 +65,7 @@
              */
             if (roundCount == 2 && monsters[0].GetHealth() == monsters[0].GetInitialHealth() && monsters[1].GetHealth() == monsters[1].GetInitialHealth())
             {
-                Output.WriteLineAtPosition("It's a draw!", Console.WindowWidth / 2);
+                Output.WriteLineAtPosition("It's a draw!", Console.WindowWidth / 2 - 6);
                 return false;
             }
 
@@ -74,18 +74,24 @@
                 Monster? winningMonster = monsters.Find(monster => monster.GetHealth() > 0f);
                 if (winningMonster != null)
                 {
-                    Interpolation.AnimateLinear(
+                    Vector2 targetPosition = new Vector2(
+                        Console.WindowWidth / 2 - winningMonster.GetSize().Width / 2,
+                        Console.WindowHeight / 2 - winningMonster.GetSize().Height / 2
+                    );
+
+					Interpolation.AnimateLinear(
                       winningMonster.GetPosition(),
-                      new Vector2(Console.WindowWidth / 2, Console.WindowHeight / 2),
+                      targetPosition,
                       (Vector2 interpolatedPositionX) =>
                       {
                           Console.Clear();
                           winningMonster.Render(interpolatedPositionX);
-                      });
+                      }
+                    );
 
 
-                    Output.WriteLineAtPosition("The winner is " + winningMonster.GetRace() + "!", Console.WindowWidth / 2);
-                    Output.WriteLineAtPosition("This fight took " + roundCount + " rounds!", Console.WindowWidth / 2);
+                    Output.WriteLineAtPosition("The winner is " + winningMonster.GetRace() + "!", targetPosition.X);
+                    Output.WriteLineAtPosition("This fight took " + roundCount + " rounds!", targetPosition.X);
 
                     return false;
                 }
@@ -95,7 +101,6 @@
             return true;
         }
 
-        // Todo: Set Console Width and height...
         public void Start()
         {
             List<Monster> monsters = SpawnManager.Instance.Initialize();

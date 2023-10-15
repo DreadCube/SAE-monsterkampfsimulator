@@ -92,6 +92,8 @@
 
         public Vector2 GetPosition() => position;
 
+        public Size GetSize() => size;
+
         /// <summary>
         /// Handles the attack logic.
         /// <list type="number">
@@ -163,7 +165,7 @@
 
             Output.WriteLineAtPosition($"{race}", renderPosition.X, Console.CursorTop + 1, minWidth: size.Width);
 
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
 
             Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", renderPosition.X, minWidth: size.Width);
             Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", renderPosition.X, minWidth: size.Width);
