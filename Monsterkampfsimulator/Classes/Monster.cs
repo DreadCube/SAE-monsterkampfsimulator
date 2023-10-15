@@ -24,14 +24,11 @@
         // The size of the monster
         private Size size = new Size(26, 19);
 
-        /**
-         * The race has to defiend from the child class
-         */
+        
+        // The race has to defiend from the child class
         protected virtual Race race { get; }
 
-        /**
-         * Represents all possible races a Monster can be
-         */
+        // Represents all possible races a Monster can be
         public enum Race
         {
             Ork = 1,
@@ -110,9 +107,7 @@
 
             Vector2 targetPosition = new Vector2(targetMonster.position.X - offset, targetMonster.position.Y);
 
-            /**
-             * Attack animation forward to the target
-             */
+            // Attack animation forward to the target
             Interpolation.AnimateLinear
             (
                 position,
@@ -129,9 +124,7 @@
             float damage = Math.Max(0, attack - targetMonster.GetDefense());
             targetMonster.TakeDamage(damage);
 
-            /**
-             * Attack animation back from the target
-             */
+            // Attack animation back from the target
             Interpolation.AnimateLinear
             (
                 targetPosition,
