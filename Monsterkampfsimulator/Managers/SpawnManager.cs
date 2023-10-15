@@ -85,6 +85,7 @@
                 return number;
             }
         }
+
         /// <summary>
         /// A helper function to read out the monster race from a user input.
         /// Basically every Monster Race is a option for the user.
