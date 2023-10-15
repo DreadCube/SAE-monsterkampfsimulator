@@ -19,7 +19,12 @@
 
         private void WaitForUserInput()
         {
-            Output.WriteLineAtPosition("Press Esc to quit, R to restart", Console.WindowWidth / 2 - 15);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 15, Console.CursorTop);
+            Output.Write("Press ");
+            Output.Write("Esc", ConsoleColor.Green);
+            Output.Write(" to quit, ");
+            Output.Write("R", ConsoleColor.Green);
+            Output.Write(" to restart");
 
             while (true)
             {
