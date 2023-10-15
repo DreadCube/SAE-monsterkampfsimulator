@@ -46,7 +46,7 @@
         /// <summary>
         /// Checks if the fight is still running.
         /// Will return false if the fight is no more running.
-        /// True in the other hand.
+        /// true in the other hand.
         /// The fight is no more running if one of following conditions happend:
         /// <list type="bullet">
         ///     <item>In round 2 if both monsters still have the initial health we have a draw</item>

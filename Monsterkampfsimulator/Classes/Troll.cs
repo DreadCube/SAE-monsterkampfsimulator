@@ -17,7 +17,7 @@
 
         protected override void RenderImage(Vector2 position)
         {
-            // Inspired by : https://ascii.co.uk/art/gnome
+            // parts copied from: https://ascii.co.uk/art/gnome
             //            __
             //         .-'  |
             //        /   <\|

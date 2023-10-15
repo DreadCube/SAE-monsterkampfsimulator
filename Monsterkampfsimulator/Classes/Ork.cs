@@ -17,7 +17,7 @@
 
         protected override void RenderImage(Vector2 position)
         {
-            // Inspired from: https://ascii.co.uk/art/ogre
+            // parts copied from: https://ascii.co.uk/art/ogre
             //////////////////////////
             //                      //
             //                      //

@@ -88,7 +88,7 @@
         /// <summary>
         /// A helper function to read out the monster race from a user input.
         /// Basically every Monster Race is a option for the user.
-        /// Optional this func can receive a race that will be excluded from the
+        /// Optional: this func can receive a race that will be excluded from the
         /// available race options.
         /// Not valid input will be catched.
         /// The user has to try again if he entered wrong input.
