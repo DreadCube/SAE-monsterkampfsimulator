@@ -17,6 +17,8 @@
 
         public void SetHealth(float health) => currentHealth = Math.Max(health, 0);
 
+        public float GetInitialHealth() => initialHealth;
+
         /// <summary>
         /// Renders the visual representation of the healthbar
         /// </summary>

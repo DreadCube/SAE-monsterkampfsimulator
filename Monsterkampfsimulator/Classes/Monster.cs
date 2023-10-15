@@ -93,6 +93,8 @@
 
         public Vector2 GetPosition() => position;
 
+        public float GetInitialHealth() => healthBar.GetInitialHealth();
+
 
         /// <summary>
         /// Handles the attack logic.
