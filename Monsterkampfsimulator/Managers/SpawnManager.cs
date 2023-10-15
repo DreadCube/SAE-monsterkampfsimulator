@@ -4,7 +4,7 @@
 	{
 		public static SpawnManager Instance = new SpawnManager();
 
-		public SpawnManager()
+		private SpawnManager()
 		{
 			if (Instance == null)
 			{

@@ -5,9 +5,7 @@ namespace Monsterkampfsimulator
     {
         public static GameManager Instance = new GameManager();
 
-
-
-        public GameManager()
+        private GameManager()
         {
             if (Instance == null)
             {
