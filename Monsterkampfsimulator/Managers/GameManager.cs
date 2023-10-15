@@ -96,8 +96,8 @@
         }
 
         // Todo: Set Console Width and height...
-		public void Start()
-		{
+        public void Start()
+        {
             List<Monster> monsters = SpawnManager.Instance.Initialize();
 
             int roundCount = 0;
@@ -118,6 +118,6 @@
 
             WaitForUserInput();
         }
-	}
+    }
 }
 

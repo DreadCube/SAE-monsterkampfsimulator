@@ -1,16 +1,16 @@
 ﻿namespace Monsterkampfsimulator
 {
-	public class SpawnManager
-	{
-		public static SpawnManager Instance = new SpawnManager();
+    public class SpawnManager
+    {
+        public static SpawnManager Instance = new SpawnManager();
 
-		private SpawnManager()
-		{
-			if (Instance == null)
-			{
-				Instance = this;
-			}
-		}
+        private SpawnManager()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+        }
 
         private Monster CreateMonster(Vector2 position, Monster.Race? notAllowedRace = null)
         {
