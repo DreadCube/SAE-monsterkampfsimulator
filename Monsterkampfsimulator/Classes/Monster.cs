@@ -24,7 +24,6 @@
         // The size of the monster
         private Size size = new Size(26, 19);
 
-
         /**
 		 * The race has to defined from the child class
 		 */
