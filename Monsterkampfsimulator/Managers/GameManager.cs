@@ -1,5 +1,4 @@
-﻿using System;
-namespace Monsterkampfsimulator
+﻿namespace Monsterkampfsimulator
 {
     public class GameManager
     {
