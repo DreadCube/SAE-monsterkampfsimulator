@@ -81,9 +81,13 @@
         /// itself doesn't make sense, because we just have instances of the child classes.
         /// So defining the method here as virtual, so every child class can override.
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">
+        /// Child classes wil receive the position
+        /// so the image can be rendered at the provided position.
+        /// </param>
         protected virtual void RenderImage(Vector2 position) { }
 
+        public float GetInitialHealth() => healthBar.GetInitialHealth();
 
         public float GetHealth() => health;
 
@@ -92,9 +96,6 @@
         public Race GetRace() => race;
 
         public Vector2 GetPosition() => position;
-
-        public float GetInitialHealth() => healthBar.GetInitialHealth();
-
 
         /// <summary>
         /// Handles the attack logic.

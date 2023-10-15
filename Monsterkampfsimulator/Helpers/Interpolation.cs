@@ -9,28 +9,33 @@
      */
     public static class Interpolation
     {
-        /**
-         * Calculates absolute position based on
-         * percentage between from and to points.
-         * 
-         * percentage is a value between 0f and 1f.
-         * 
-         * Example:
-         * from = 10f
-         * to = 20f
-         * by = 0.5f
-         * result = 15f
-         */
+        /// <summary>
+        /// Calculates point between two given points and distance amount.
+        ///
+        /// <example> 
+        /// Example:
+        /// <code>
+        ///  Linear(10f, 20f, 0.5f); // result is 15f;
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// 
+        /// <param name="by">distance amount (between 0f and 1f)</param>
         private static float Linear(float from, float to, float by)
         {
             return from * (1 - by) + to * by;
         }
 
-        /**
-         * Overload: Based on the upper float Linear helper func
-         * but guarantees us an integer as output instead of
-         * a float
-         */
+        /// <summary>
+        /// Calculates point between two given points and distance amount.
+        /// <example> 
+        /// Example:
+        /// <code>
+        ///  Linear(10, 20, 0.5f); // result is 15;
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// <param name="by">distance amount (between 0f and 1f)</param>
         private static int Linear(int from, int to, float by)
         {
             float value = Linear(from + 0f, to + 0f, by);
@@ -38,12 +43,13 @@
             return (int)Math.Round(value);
         }
 
-        /**
-         * A linear interpolation animator.
-         * 
-         * A callback will be executed for every frame.
-         * The callback receives the interpolated position at the current frame.
-         */
+        /// <summary>
+        /// A linear interpolation animator that can be used to provide
+        /// a animation for moving between 2 points.
+        ///
+        /// A callback will be executed for every frame.
+        /// The callback receives the interpolated Position at the current frame.
+        /// </summary>
         public static void AnimateLinear(Vector2 from, Vector2 to, Action<Vector2> frameCallback, uint frames = 20, int frameTime = 50)
         {
             for (uint i = 1; i <= frames; i++)

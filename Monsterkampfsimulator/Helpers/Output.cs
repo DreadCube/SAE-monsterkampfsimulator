@@ -21,8 +21,6 @@
         /// <summary>
         /// Writes string text. Optional a foreground Color can be provided.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="foregroundColor"></param>
         public static void Write(string text, ConsoleColor? foregroundColor = null)
         {
             Console.ForegroundColor = foregroundColor ?? Console.ForegroundColor;
@@ -33,8 +31,6 @@
         /// <summary>
         /// Writes float text. Optional a foreground Color can be provided.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="foregroundColor"></param>
         public static void Write(float text, ConsoleColor? foregroundColor = null)
         {
             Console.ForegroundColor = foregroundColor ?? Console.ForegroundColor;
@@ -45,8 +41,6 @@
         /// <summary>
         /// Writes int text. Optional a foreground Color can be provided.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="foregroundColor"></param>
         public static void Write(int text, ConsoleColor? foregroundColor = null)
         {
             Console.ForegroundColor = foregroundColor ?? Console.ForegroundColor;

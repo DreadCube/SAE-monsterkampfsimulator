@@ -35,10 +35,8 @@
 
             for (byte i = 1; i <= healthBarWidth; i++)
             {
-                Console.ForegroundColor = i <= greenBlockCount ? ConsoleColor.Green : ConsoleColor.Red;
-                Console.Write("█");
+                Output.Write("█", i <= greenBlockCount ? ConsoleColor.Green : ConsoleColor.Red);
             }
-            Console.ResetColor();
         }
     }
 }
