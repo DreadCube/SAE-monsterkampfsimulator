@@ -94,9 +94,8 @@
                       }
                     );
 
-
-                    Output.WriteLineAtPosition("The winner is " + winningMonster.GetRace() + "!", targetPosition.X);
-                    Output.WriteLineAtPosition("This fight took " + roundCount + " rounds!", targetPosition.X);
+                    Output.WriteLineAtPosition($"The winner is {winningMonster.GetRace()}!", targetPosition.X);
+                    Output.WriteLineAtPosition($"This fight took {roundCount} rounds!", targetPosition.X);
 
                     return false;
                 }
