@@ -62,7 +62,7 @@
         /// <param name="monsters"> The fighting monsters</param>
         /// <param name="roundCount">The current roundCount</param>
         /// <returns></returns>
-        private bool isFightRunning(List<Monster> monsters, int roundCount)
+        private bool IsFightRunning(List<Monster> monsters, int roundCount)
         {
             /*
              * After two rounds if theres no damage to any of the monsters we
@@ -84,7 +84,7 @@
                         Console.WindowHeight / 2 - winningMonster.GetSize().Height / 2
                     );
 
-					Interpolation.AnimateLinear(
+                    Interpolation.AnimateLinear(
                       winningMonster.GetPosition(),
                       targetPosition,
                       (Vector2 interpolatedPositionX) =>
@@ -111,7 +111,7 @@
 
             int roundCount = 0;
 
-            while (isFightRunning(monsters, roundCount))
+            while (IsFightRunning(monsters, roundCount))
             {
                 roundCount++;
 

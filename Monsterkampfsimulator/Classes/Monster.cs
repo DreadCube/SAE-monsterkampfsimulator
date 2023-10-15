@@ -36,7 +36,6 @@
             Goblin = 3
         }
 
-
         protected Monster(float health, float attack, float defense, float speed, Vector2 position)
         {
             this.health = health;
@@ -121,7 +120,6 @@
                     targetMonster.Render(targetMonster.GetPosition());
                 }
             );
-
 
             float damage = Math.Max(0, attack - targetMonster.GetDefense());
             targetMonster.TakeDamage(damage);
