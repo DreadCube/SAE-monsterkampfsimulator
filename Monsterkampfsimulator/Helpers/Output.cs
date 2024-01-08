@@ -93,6 +93,8 @@
 
             Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "Goblin", "", "50% change:"));
             Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", "", "- receives zero damage but defense will be halfed"));
+
+            Console.CursorTop = 0;
         }
     }
 }

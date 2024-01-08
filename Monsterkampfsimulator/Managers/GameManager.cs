@@ -96,6 +96,7 @@
 
         public void Start()
         {
+            Console.SetWindowSize(Console.WindowWidth, 50);
             Output.ShowBuffTable();
             List<Monster> monsters = SpawnManager.Instance.Initialize();
 
