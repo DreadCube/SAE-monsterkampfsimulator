@@ -2,6 +2,8 @@
 {
     public class Ork : Monster
     {
+        private int roundsSinceBuff = 0;
+
         protected override Race race
         {
             get
@@ -45,6 +47,26 @@
             Output.WriteLineAtPosition("//                      //", position.X, position.Y + 10);
             Output.WriteLineAtPosition("//                      //", position.X, position.Y + 11);
             Output.WriteLineAtPosition("//////////////////////////", position.X, position.Y + 12);
+        }
+
+        /// <summary>
+        /// Orks buff is a critical hit. The changes are 25%. In this case
+        /// the damage is Orks Attack. But his defense goes zo zero afterwards.
+        /// </summary>
+        /// <param name="targetMonster"></param>
+        /// <returns></returns>
+        protected override float CalcDamage(Monster targetMonster)
+        {
+            if (random.Next(0, 4) == 0)
+            {
+                AddAttributeTransition(new AttributeTransition(Attribute.Defense, 0, "Buff: Critical hit!", () =>
+                {
+                    defense = 0f;
+                }));
+                return attack;
+            }
+
+            return base.CalcDamage(targetMonster);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Monsterkampfsimulator
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace Monsterkampfsimulator
 {
     public class Troll : Monster
     {
@@ -40,6 +42,41 @@
             Output.WriteLineAtPosition("//                      //", position.X, position.Y + 10);
             Output.WriteLineAtPosition("//                      //", position.X, position.Y + 11);
             Output.WriteLineAtPosition("//////////////////////////", position.X, position.Y + 12);
+        }
+
+        /// <summary>
+        /// The Troll has a 33% change to perform his attack buff:
+        ///  - steal 20% Health from enemy
+        ///  - but lower its defense by stolen amount
+        /// </summary>
+        /// <param name="targetMonster"></param>
+        /// <returns></returns>
+        protected override float CalcDamage(Monster targetMonster)
+        {
+            float damage = base.CalcDamage(targetMonster);
+
+            if (random.Next(0, 3) == 0)
+            {
+                float additionalDamage = targetMonster.GetHealth() * 0.2f;
+
+                float newHealth = health + additionalDamage;
+                float newDefense = defense - additionalDamage;
+
+                AddAttributeTransition(new AttributeTransition(Attribute.Health, newHealth, "Buff: Steal Health", () =>
+                {
+                    health = newHealth;
+                    healthBar.SetHealth(health);
+                }));
+
+                AddAttributeTransition(new AttributeTransition(Attribute.Defense, newDefense, "Buff: Reduce Defense", () =>
+                {
+                    defense = newDefense;
+                }));
+
+                return damage + additionalDamage;
+            }
+
+            return damage;
         }
     }
 }

@@ -70,6 +70,30 @@
             }
             ClearCurrentLine();
         }
+
+        /// <summary>
+        /// Shows Information about which Monster Type has which buffs
+        /// </summary>
+        public static void ShowBuffTable()
+        {
+            Console.CursorTop = Console.WindowHeight - 13;
+
+            Console.WriteLine("Buff List");
+
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "Race", "Buffs on Attack", "Buffs on getting Attacked"));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", "", ""));
+
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "Ork", "25% change:", ""));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", " - critical hit. Enemy defense will be ignored", ""));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", " - but defense goes to zero", ""));
+
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "Troll", "33% change:", ""));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", " - steal 20% health from enemy", ""));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", " - defense will be reduced by stolen amount", ""));
+
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "Goblin", "", "50% change:"));
+            Console.WriteLine(string.Format("|{0,-10}|{1,-50}|{2,-50}|", "", "", "- receives zero damage but defense will be halfed"));
+        }
     }
 }
 
