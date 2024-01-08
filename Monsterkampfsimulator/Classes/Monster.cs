@@ -2,14 +2,11 @@
 {
     public class Monster
     {
-        // HP (Health Points)
-        private float health;
+        // The size of the monster
+        private Size size = new Size(26, 19);
 
-        // AP (Attack Points)
-        private float attack;
-
-        // DP (Defense Points)
-        private float defense;
+        // List of Attribute Transitions (Buffs)
+        private List<AttributeTransition> attributeTransitions = new List<AttributeTransition>();
 
         // SP (Speed Points)
         private float speed;
@@ -17,16 +14,22 @@
         // position of the monster
         private Vector2 position;
 
+        // HP (Health Points)
+        protected float health;
+
+        // AP (Attack Points)
+        protected float attack;
+
+        // DP (Defense Points)
+        protected float defense;
+
         // the healthbar instance of the monster
-        private HealthBar healthBar;
+        protected HealthBar healthBar;
 
-
-        // The size of the monster
-        private Size size = new Size(26, 19);
-
-        
         // The race has to defiend from the child class
         protected virtual Race race { get; }
+
+        protected Random random = new Random();
 
         // Represents all possible races a Monster can be
         public enum Race
@@ -46,28 +49,32 @@
             healthBar = new HealthBar(health, size.Width);
         }
 
-        /// <summary>
-        /// Applies damage to the monster (if damage is there).
-        /// health of the monster will not go under 0.
-        ///
-        /// If theres damage to the target monster we render the target monster red
-        /// for a split of a time
-        /// </summary>
-        /// <param name="damage">the damage to take</param>
-        private void TakeDamage(float damage)
-        {
-            health = Math.Max(0, health - damage);
-            healthBar.SetHealth(health);
+        private float GetDefense() => defense;
 
-            if (damage > 0f)
+        /// <summary>
+        /// Handles a single Attribute Transition Animation at provided position
+        /// and value.
+        /// With Thread Sleep we simulate a blinking animation of the new Attribute value.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="value"></param>
+        private void AnimateAttributeTransition(Vector2 position, float value)
+        {
+            for (int i = 0; i < 15; i++)
             {
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+
+                Console.CursorLeft = position.X;
+                Console.CursorTop = position.Y;
+
                 Thread.Sleep(100);
-                Render(position, ConsoleColor.Red);
-                Thread.Sleep(100);
+
+                Output.Write(" -> ", ConsoleColor.White);
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+
+                Output.Write($"{Math.Round(value, 2)}", i % 2 == 1 ? ConsoleColor.Green : ConsoleColor.White);
             }
         }
-
-        private float GetDefense() => defense;
 
         /// <summary>
         /// We wanna enforce that every child class of monster has a RenderImage
@@ -80,6 +87,40 @@
         /// so the image can be rendered at the provided position.
         /// </param>
         protected virtual void RenderImage(Vector2 position) { }
+
+        /// <summary>
+        /// Default Damage Calculation.
+        /// attacking monster (this) attack minus targetMonster defense gives us
+        /// the actual damage.
+        /// </summary>
+        /// <param name="targetMonster"></param>
+        /// <returns></returns>
+        protected virtual float CalcDamage(Monster targetMonster)
+        {
+            return Math.Max(0, attack - targetMonster.GetDefense());
+        }
+
+        /// <summary>
+        /// Applies damage to the monster (if damage is there).
+        /// health of the monster will not go under 0.
+        ///
+        /// If theres damage to the target monster we render the target monster red
+        /// for a split of a time
+        /// </summary>
+        /// <param name="damage">the damage to take</param>
+        protected virtual void TakeDamage(float damage)
+        {
+            health = Math.Max(0, health - damage);
+
+            healthBar.SetHealth(health);
+
+            if (damage > 0f)
+            {
+                Thread.Sleep(100);
+                Render(position, ConsoleColor.Red);
+                Thread.Sleep(100);
+            }
+        }
 
         public float GetInitialHealth() => healthBar.GetInitialHealth();
 
@@ -116,13 +157,17 @@
                 (Vector2 interpolatedPosition) =>
                 {
                     Console.Clear();
+                    Output.ShowBuffTable();
                     Render(interpolatedPosition);
                     targetMonster.Render(targetMonster.GetPosition());
                 }
             );
 
-            float damage = Math.Max(0, attack - targetMonster.GetDefense());
+            float damage = CalcDamage(targetMonster);
+            Render(targetPosition);
+
             targetMonster.TakeDamage(damage);
+            Render(targetMonster.GetPosition());
 
             // Attack animation back from the target
             Interpolation.AnimateLinear
@@ -132,6 +177,7 @@
                 (Vector2 interpolatedPosition) =>
                 {
                     Console.Clear();
+                    Output.ShowBuffTable();
                     Render(interpolatedPosition);
                     targetMonster.Render(targetMonster.GetPosition());
                 }
@@ -145,6 +191,7 @@
         /// <item>The monster image</item>
         /// <item>The monster healthbar</item>
         /// <item>The monster stats</item>
+        /// <item>Buff informations</item>
         /// </list>
         /// </summary>
         /// <param name="renderPosition">Vector2 position</param>
@@ -165,12 +212,65 @@
 
             Console.BackgroundColor = ConsoleColor.DarkGray;
 
-            Output.WriteLineAtPosition($"HEALTH: {Math.Round(health, 2)}", renderPosition.X, minWidth: size.Width);
-            Output.WriteLineAtPosition($"ATTACK: {Math.Round(attack, 2)}", renderPosition.X, minWidth: size.Width);
-            Output.WriteLineAtPosition($"DEFENSE: {Math.Round(defense, 2)}", renderPosition.X, minWidth: size.Width);
-            Output.WriteLineAtPosition($"SPEED: {Math.Round(speed, 2)}", renderPosition.X, minWidth: size.Width);
+            string healthText = $"HEALTH: {Math.Round(health, 2)}";
+            Output.WriteLineAtPosition(healthText, renderPosition.X, minWidth: size.Width);
+
+            string attackText = $"ATTACK: {Math.Round(attack, 2)}";
+            Output.WriteLineAtPosition(attackText, renderPosition.X, minWidth: size.Width);
+
+            string defenseText = $"DEFENSE: {Math.Round(defense, 2)}";
+            Output.WriteLineAtPosition(defenseText, renderPosition.X, minWidth: size.Width);
+
+            string speedText = $"SPEED: {Math.Round(speed, 2)}";
+            Output.WriteLineAtPosition(speedText, renderPosition.X, minWidth: size.Width);
+
+            Vector2 position;
+
+            /*
+             * Render the Attribute Transitions (if existing) out to the Attribute Stats 
+             */
+            foreach (AttributeTransition transition in attributeTransitions)
+            {
+                if (transition.Message != null)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Output.WriteLineAtPosition(transition.Message, renderPosition.X, renderPosition.Y + size.Height, size.Width);
+                }
+
+                switch (transition.AttributeName)
+                {
+                    case Attribute.Health:
+                        position = new Vector2(renderPosition.X + healthText.Length, renderPosition.Y + size.Height - 4);
+                        AnimateAttributeTransition(position, transition.Value);
+                        break;
+
+                    case Attribute.Attack:
+                        position = new Vector2(renderPosition.X + attackText.Length, renderPosition.Y + size.Height - 3);
+                        AnimateAttributeTransition(position, transition.Value);
+                        break;
+
+                    case Attribute.Defense:
+                        position = new Vector2(renderPosition.X + defenseText.Length, renderPosition.Y + size.Height - 2);
+                        AnimateAttributeTransition(position, transition.Value);
+                        break;
+                    default:
+                        position = new Vector2(renderPosition.X + speedText.Length, renderPosition.Y + size.Height - 1);
+                        AnimateAttributeTransition(position, transition.Value);
+                        break;
+                }
+                transition.OnTransitionEnd();
+            }
+
+            // Cleanup Transitions after end
+            attributeTransitions.Clear();
 
             Console.ResetColor();
+        }
+
+        public void AddAttributeTransition(AttributeTransition attributeTransition)
+        {
+            attributeTransitions.Add(attributeTransition);
         }
     }
 }

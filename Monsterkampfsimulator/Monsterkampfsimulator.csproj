@@ -12,11 +12,13 @@
     <None Remove="Helpers\" />
     <None Remove="Structs\" />
     <None Remove="Classes\" />
+    <None Remove="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Managers\" />
     <Folder Include="Helpers\" />
     <Folder Include="Structs\" />
     <Folder Include="Classes\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>
