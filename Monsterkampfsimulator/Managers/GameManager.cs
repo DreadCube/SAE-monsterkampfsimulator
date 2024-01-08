@@ -54,7 +54,6 @@
         /// true in the other hand.
         /// The fight is no more running if one of following conditions happend:
         /// <list type="bullet">
-        ///     <item>In round 2 if both monsters still have the initial health we have a draw</item>
         ///     <item>If one of the monsters has zero health</item>
         /// </list>
         /// We output proper messages to the user if the fight stopped.
@@ -64,16 +63,6 @@
         /// <returns></returns>
         private bool IsFightRunning(List<Monster> monsters, int roundCount)
         {
-            /*
-             * After two rounds if theres no damage to any of the monsters we
-             * have a draw.
-             */
-            if (roundCount == 2 && monsters[0].GetHealth() == monsters[0].GetInitialHealth() && monsters[1].GetHealth() == monsters[1].GetInitialHealth())
-            {
-                Output.WriteLineAtPosition("It's a draw!", Console.WindowWidth / 2 - 6);
-                return false;
-            }
-
             if (monsters.Exists(monster => monster.GetHealth() <= 0f))
             {
                 Monster? winningMonster = monsters.Find(monster => monster.GetHealth() > 0f);
@@ -107,6 +96,7 @@
 
         public void Start()
         {
+            Output.ShowBuffTable();
             List<Monster> monsters = SpawnManager.Instance.Initialize();
 
             int roundCount = 0;
