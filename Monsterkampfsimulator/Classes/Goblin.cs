@@ -47,5 +47,23 @@
             Output.WriteLineAtPosition("///       '----'       \\//", position.X, position.Y + 11);
             Output.WriteLineAtPosition("//////////////////////////", position.X, position.Y + 12);
         }
+
+        /// <summary>
+        /// Goblin has a 50% change to receive no damage trough buff.
+        /// But in this case his defense will be halfed.
+        /// </summary>
+        /// <param name="damage"></param>
+        protected override void TakeDamage(float damage)
+        {
+            if (damage > 0f && random.Next(0, 2) == 0)
+            {
+                AddAttributeTransition(new AttributeTransition(Attribute.Defense, defense * 0.5f, "Buff: No damage!", () =>
+                {
+                    defense = defense * 0.5f;
+                }));
+                damage = 0;
+            }
+            base.TakeDamage(damage);
+        }
     }
 }
